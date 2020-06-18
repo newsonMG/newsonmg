@@ -1,14 +1,10 @@
-@extends('layouts.app', ['title' => 'Bienvenue!'])
+@extends('layouts.app', ['title' => 'Accueil'])
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
-            <h3>S'inscrire</h3>
+        <div class="col-md-12">
+            <h3>Page d'accueil</h3>
             
-        </div>
-        <div class="col-md-6">
-            <h3>Connecter</h3>
-           
         </div>
     </div>
 @endsection
