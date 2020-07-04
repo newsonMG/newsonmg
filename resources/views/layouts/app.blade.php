@@ -23,30 +23,41 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark flex-md-nowrap  p-2 shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="{{ url('/') }}">
                     NewsonMG
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler position-relative d-md-none collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="navbar-nav px-3 mr-auto">
+                        <li class="nav-item text-nowrap active">
+                            <a class="nav-link" href="{{ url('/') }}">Acceuil <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item text-nowrap">
+                            <a class="nav-link" href="#">Mes Cours</a>
+                        </li>
+                        <li class="nav-item text-nowrap">
+                            <a class="nav-link" href="#">A Propos</a>
+                        </li>
+                        <li class="nav-item text-nowrap">
+                            <a class="nav-link" href="#">Me Contacter</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav px-3 ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
+                            <li class="nav-item text-nowrap">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                <li class="nav-item text-nowrap">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
@@ -73,8 +84,12 @@
                 </div>
             </div>
         </nav>
-
-        <main class="container py-4">
+        <main role="main" class="container flex-shrink-0">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>
