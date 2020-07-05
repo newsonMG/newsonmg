@@ -54,11 +54,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item text-nowrap">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link btn btn-outline-primary btn-sm" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item text-nowrap">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('S\'inscrire') }}</a>
                                 </li>
                             @endif
                         @else
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </nav>
-        <main role="main" class="container flex-shrink-0">
+        <main role="main" class="container flex-shrink-0 mt-4">
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
