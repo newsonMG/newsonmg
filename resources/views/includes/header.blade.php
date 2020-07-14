@@ -1,6 +1,6 @@
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
+  <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <div class="col-md-12 mx-auto text-center p-0 my-0">
         <h1 class="display-4 font-weight-normal">NewsonMG</h1>

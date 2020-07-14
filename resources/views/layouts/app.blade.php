@@ -2,9 +2,10 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="{{ asset('ico/fav-nmg.ico') }}">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -23,10 +24,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark flex-md-nowrap  p-2 shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark flex-md-nowrap  p-1 shadow-sm">
             <div class="container">
-                <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="{{ url('/') }}">
-                    NewsonMG
+                <a class="navbar-brand mr-0" href="{{ url('/') }}">
+                    <img src="{{ asset('png/My-First.png') }}" width="70" height="70" alt="" loading="lazy">
                 </a>
                 <button class="navbar-toggler position-relative d-md-none collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -39,7 +40,7 @@
                             <a class="nav-link" href="{{ url('/') }}">Acceuil <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item text-nowrap">
-                            <a class="nav-link" href="#">Mes Cours</a>
+                            <a class="nav-link" href="#">Tutoriels</a>
                         </li>
                         <li class="nav-item text-nowrap">
                             <a class="nav-link" href="#">A Propos</a>
@@ -68,6 +69,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('courses.create') }}">Créer un cours</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -93,5 +95,7 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- JS, Popper.js, and jQuery -->
 </body>
 </html>

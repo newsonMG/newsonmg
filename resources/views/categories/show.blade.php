@@ -1,14 +1,14 @@
-@extends('layouts.app', ['title' => 'Home'])
+@extends('layouts.app', ['title' => 'Catégories'])
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Catégories</div>
 
                 <div class="card-body">
-                    You are logged in!
+                    Tous les catégories
                 </div>
             </div>
         </div>
