@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
@@ -19,7 +20,8 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::with('category')->all();
+        return view('courses.index', compact('courses'));
     }
 
     /**
@@ -29,7 +31,8 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        return view('courses.create');
+        $categories = Category::all();
+        return view('courses.create', compact('categories'));
     }
 
     /**
@@ -43,8 +46,10 @@ class CoursesController extends Controller
         $data = request()->validate([
             'title' => ['required', 'string', 'unique:courses', 'max:255'],
             'description' => ['required', 'string'],
-            'image' => ['required', 'image'],
-            'url' => ['required', 'string'],
+            'content' => ['required', 'string'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'slug' => ['required', 'string'],
+            'category_id' => ['required', 'integer'],
         ]);
 
         $imagePath = request('image')->store('uploads/images', 'public');
@@ -52,8 +57,10 @@ class CoursesController extends Controller
         auth()->user()->courses()->create([
             'title' => $data['title'],
             'description' => $data['description'],
+            'content' => $data['content'],
             'image' => $imagePath,
-            'url' => $data['url'],
+            'slug' => $data['slug'],
+            'category_id' => $data['category_id'],
         ]);
 
         return redirect()->route('home');
@@ -67,7 +74,7 @@ class CoursesController extends Controller
      */
     public function show(Course $course)
     {
-        
+        return view('courses.show', compact('course'));
     }
 
     /**
@@ -78,7 +85,8 @@ class CoursesController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        $categories = Category::lists('name', 'id');
+        return view('courses.edit', compact('course', 'categories'));
     }
 
     /**

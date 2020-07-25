@@ -38,6 +38,17 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="content" class="">Contenu</label>
+                                <input id="content" type="text" class="form-control @error('content') is-invalid @enderror" name="content" value="{{ old('content') }}" autocomplete="content">
+
+                                @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
+
+                        <div class="form-group">
                                 <div class="custom-file">
                                     <input type="file" name='image' class="custom-file-input form-control @error('image') is-invalid @enderror" id="ValidatedCustomeFile1">
                                     <label for="ValidatedCustomeFile1" class="custom-file-label">Choisir une image</label>
@@ -50,15 +61,30 @@
                         </div>
 
                         <div class="form-group">
-                                    <div class="custom-file">
-                                        <input type="text" name='url' class="form-control @error('url') is-invalid @enderror">
-                                        <label class="" for="url">Url de la vidéo</label>
-                                        @error('url')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                            <label for="slug" class="">Url</label>
+                                <input id="slug" type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') }}" autocomplete="slug">
+
+                                @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category_id" class="">Catégories</label>
+                                <select class="form-control @error('category_id') is-invalid @enderror" name="category_id">                                   
+                                        <option value="">Choisir une catégorie</option>
+                                            @foreach ($categories as $cat)
+                                               <option value="{{ $cat['id'] }}">{{ $cat['name'] }}</option> 
+                                            @endforeach
+                                </select>
+
+                                @error('category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
 
                         <div class="form-group mb-0">

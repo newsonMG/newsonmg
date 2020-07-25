@@ -17,6 +17,7 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->string('avatar');
             $table->unsignedBigInteger('user_id')->index();
             $table->timestamps();
         });

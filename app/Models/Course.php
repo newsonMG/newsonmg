@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $fillable = [
-        'title', 'description', 'image', 'url',
+        'title', 'description', 'content', 'image', 'slug', 'category_id',
     ];
 
     public function user()
@@ -15,8 +15,8 @@ class Course extends Model
         return $this->belongsTo('App\User');
     }
 
-    /**public function categorie()
+    public function category()
     {
-        return $this->belongsTo('App\Models\Categorie');
-    }*/
+        return $this->belongsTo('App\Models\Category');
+    }
 }
