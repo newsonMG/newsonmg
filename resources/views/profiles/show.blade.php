@@ -7,7 +7,10 @@
             <img src="" alt="" class="rounded-circle">
         </div>
         <div class="col-md-8">
-            <div class="h1">{{ $user->username }}</div>
+            <div class="h1 mr-3 ">{{ $user->username }}</div>
+            @can('update', $user->profile)
+                <a href="{{ route('profiles.edit', ['username' => $user->username]) }}" class="btn btn-outline-secondary mt-3">Modifier mes informations</a>
+            @endcan
             <div class="d-flex mt-3">
             <div class="mr-3 "><strong>28</strong> publication(s)</div>
                 <div class="mr-3 "><strong>10</strong> catégorie(s)</div>
