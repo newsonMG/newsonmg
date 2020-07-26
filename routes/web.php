@@ -19,8 +19,9 @@ Route::get('/', function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profiles/{user}', 'ProfilesController@show')->name('profiles.show');
+Route::get('home', 'HomeController@index')->name('home');
+Route::get('profiles/{user}', 'ProfilesController@show')->name('profiles.show');
 
-Route::get('/courses/create', 'CoursesController@create')->name('courses.create');
-Route::post('/courses', 'CoursesController@store')->name('courses.store');
+Route::get('courses/create', 'CoursesController@create')->name('courses.create');
+Route::post('courses', 'CoursesController@store')->name('courses.store');
+Route::get('courses/{course}', 'CoursesController@show')->name('courses.show');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class CoursesController extends Controller
 {
@@ -53,6 +54,8 @@ class CoursesController extends Controller
         ]);
 
         $imagePath = request('image')->store('uploads/images', 'public');
+        $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
+        $image->save();
     
         auth()->user()->courses()->create([
             'title' => $data['title'],

@@ -21,9 +21,13 @@
     </div>
     <hr class="my-4 border border-dark">
     <div class="row mt-4">
-        <div class="col-md-4">ss</div>
-        <div class="col-md-4">ss</div>
-        <div class="col-md-4">ss</div>
+        @foreach ($user->courses as $course)
+            <div class="col-md-4 pb-3">
+                <a href="{{ route('courses.show', ['course' => $course->id]) }}">
+                    <img src="{{ asset('storage') . '/' . $course->image }}" alt="" class="w-100">
+                </a>
+            </div>
+        @endforeach
     </div>
 </div>
 @endsection
