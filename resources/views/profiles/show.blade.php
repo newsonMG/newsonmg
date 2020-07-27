@@ -1,22 +1,16 @@
-@extends('layouts.app', ['title' => 'profil'])
+@extends('layouts.app', ['title' => 'Profil'])
 
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-4 text-center">
-            <img src="" alt="" class="rounded-circle">
+        <div class="col-md-4 col-sm-4 text-center">
+            <img src="{{ $user->profile->getImage() }}" alt="" class="rounded-circle w-100" style="max-width: 230px;">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-8">
             <div class="h1 mr-3 ">{{ $user->username }}</div>
-            @can('update', $user->profile)
-                <a href="{{ route('profiles.edit', ['username' => $user->username]) }}" class="btn btn-outline-secondary mt-3">Modifier mes informations</a>
-            @endcan
-            <div class="d-flex mt-3">
-            <div class="mr-3 "><strong>28</strong> publication(s)</div>
-                <div class="mr-3 "><strong>10</strong> catégorie(s)</div>
-                <div class="mr-3 "><strong>200</strong> élèves</div>
-            </div>
-            <div class="mt-3">
+            <a href="{{ route('profiles.edit', auth()->user()->username) }}" class="btn btn-outline-secondary mt-2">Modifier mes informations</a>
+            <div class="mr-3 mt-2"><strong>{{ $user->courses->count() }}</strong> publication(s)</div>
+            <div class="mt-1">
                 <div class="font-weight-bold">{{ $user->profile->title }}</div>
                 <div class="lead">{{ $user->profile->description }}</div>
             </div>

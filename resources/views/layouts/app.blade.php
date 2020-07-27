@@ -40,7 +40,7 @@
                             <a class="nav-link" href="{{ url('/') }}">Acceuil <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item text-nowrap">
-                            <a class="nav-link" href="#">Tutoriels</a>
+                            <a class="nav-link" href="{{ route('courses.index') }}">Cours</a>
                         </li>
                         <li class="nav-item text-nowrap">
                             <a class="nav-link" href="#">A Propos</a>
@@ -53,6 +53,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav px-3 ml-auto">
                         <!-- Authentication Links -->
+                        @auth
+                            <li class="nav-item text-nowrap">
+                                <a class="nav-link" href="{{ route('courses.create') }}">Créer un cours</a>
+                            </li>
+                        @endauth
                         @guest
                             <li class="nav-item text-nowrap">
                                 <a class="nav-link btn btn-outline-primary btn-sm" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
@@ -69,7 +74,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('courses.create') }}">Créer un cours</a>
+                                    <a class="dropdown-item" href="{{ route('profiles.show', auth()->user()->username) }}">Mon profil</a>
+                                    <a class="dropdown-item" href="{{ route('home') }}">Tableau de bord</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

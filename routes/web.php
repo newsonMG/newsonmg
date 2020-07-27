@@ -20,10 +20,12 @@ Route::get('/', function(){
 Auth::routes();
 
 Route::get('home', 'HomeController@index')->name('home');
+
 Route::get('profiles/{user}', 'ProfilesController@show')->name('profiles.show');
 Route::get('profiles/{user}/edit', 'ProfilesController@edit')->name('profiles.edit');
 Route::patch('profiles/{user}', 'ProfilesController@update')->name('profiles.update');
 
+Route::get('courses', 'CoursesController@index')->name('courses.index');
 Route::get('courses/create', 'CoursesController@create')->name('courses.create');
 Route::post('courses', 'CoursesController@store')->name('courses.store');
 Route::get('courses/{course}', 'CoursesController@show')->name('courses.show');

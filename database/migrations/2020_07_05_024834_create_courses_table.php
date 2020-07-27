@@ -18,7 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('title')->unique();
             $table->longText('description');
             $table->longText('content');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->longText('slug');
             $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('category_id')->index();

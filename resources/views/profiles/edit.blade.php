@@ -43,10 +43,10 @@
 
                         <div class="form-group">
                                 <div class="custom-file">
-                                    <input type="file" name='avatar' class="custom-file-input form-control @error('avatar') is-invalid @enderror" id="ValidatedCustomeFile1">
+                                    <input type="file" name='image' class="custom-file-input form-control @error('image') is-invalid @enderror" id="ValidatedCustomeFile1">
                                     <label for="ValidatedCustomeFile1" class="custom-file-label">Choisir une image</label>
 
-                                    @error('avatar')
+                                    @error('image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

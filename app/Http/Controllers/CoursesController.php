@@ -21,7 +21,7 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('category')->all();
+        $courses = Course::with('category')->orderBy('created_at', 'DESC')->get();
         return view('courses.index', compact('courses'));
     }
 
@@ -48,23 +48,23 @@ class CoursesController extends Controller
             'title' => ['required', 'string', 'unique:courses', 'max:255'],
             'description' => ['required', 'string'],
             'content' => ['required', 'string'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'slug' => ['required', 'string'],
             'category_id' => ['required', 'integer'],
         ]);
 
-        $imagePath = request('image')->store('uploads/images', 'public');
-        $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
-        $image->save();
-    
-        auth()->user()->courses()->create([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'content' => $data['content'],
-            'image' => $imagePath,
-            'slug' => $data['slug'],
-            'category_id' => $data['category_id'],
-        ]);
+        if (request('image')){
+            $imagePath = request('image')->store('uploads', 'public');
+            $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1200, 1200);
+            $image->save();
+
+            auth()->user()->courses()->create(array_merge(
+                $data,
+                ['image' => $imagePath]
+            ));
+        }else{
+            auth()->user()->courses()->create($data);
+        }
 
         return redirect()->route('home');
     }

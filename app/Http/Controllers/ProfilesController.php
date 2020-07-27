@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProfilesController extends Controller
 {
@@ -56,9 +57,7 @@ class ProfilesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {
-        $this->authorize('update', $user->profile);
-        
+    {   
         return view('profiles.edit', compact('user'));
     }
 
@@ -71,17 +70,26 @@ class ProfilesController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->authorize('update', $user->profile);
-
         $data = request()->validate([
-            'title' => ['required', 'string']
-            'description' => ['required', 'string']
-            'avatar' => ['required', 'image']
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'image' => ['sometimes', 'image', 'max:2048']
         ]);
 
-        auth()->user()->profile->update($data);
+        if (request('image')) {
+            $imagePath = request('image')->store('avatars', 'public');
+            $image = Image::make(public_path("/storage/{$imagePath}"))->fit(800, 800);
+            $image->save();
 
-        return redirect()->route('profiles.show', ['user' => $user]);
+            auth()->user()->profile->update(array_merge(
+                $data,
+                ['image' => $imagePath]
+            ));
+        }else{
+            auth()->user()->profile->update($data);
+        }
+
+        return redirect()->route('home');
     }
 
     /**
